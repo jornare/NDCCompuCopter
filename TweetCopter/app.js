@@ -7,7 +7,9 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , arDrone = require('ar-drone')
+  , drone  = arDrone.createClient();
 
 var app = express();
 

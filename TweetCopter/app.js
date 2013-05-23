@@ -8,8 +8,9 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  , arDrone = require('ar-drone')
-  , drone  = arDrone.createClient();
+//  , arDrone = require('ar-drone')
+//  , drone  = arDrone.createClient()
+  , cxtwit = require('./cxndctwit');
 
 var app = express();
 
@@ -39,6 +40,9 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+cxtwit.cxstream(function(tweet) {
+	console.log(tweet.text);	
+});
 
 io.sockets.on('connection', function (socket) {
    /* socket.emit('news', { hello: 'world' });

@@ -19,3 +19,47 @@ table#screens td {
   width: 50%;
   background: #fff;
 }
+
+.twit {
+  float: left;
+  clear: both;
+  padding-left: 1em;
+}
+
+.twit-img {
+    float: left;
+    clear: left;
+}
+
+.twit-info {
+    float: left;
+    padding-left:1em;
+}
+.twit-name {
+   float: left;
+   font-weight:bold;
+}
+
+.twit-screen-name {
+  float: left;
+  opacity: 0.4;
+  padding-left: 0.5em;
+}
+
+  .twit-screen-name:before
+  {
+    content: '@';
+  }
+
+.twit-text {
+  float: left;
+  clear: both;
+}
+
+.twit-date
+{
+  float: left;
+  clear: both;
+  opacity: 0.4;
+  font-size: 0.6em;
+}

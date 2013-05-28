@@ -5,6 +5,8 @@
 html, body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   height: 100%;
+  background-color: #777;
+  color: #000;
 }
 a {
   color: #00B7FF;
@@ -15,5 +17,5 @@ table#screens {
 }
 table#screens td {
   width: 50%;
-  background: #f00;
+  background: #fff;
 }

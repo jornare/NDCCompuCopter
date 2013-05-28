@@ -10,7 +10,8 @@ var express = require('express')
   , path = require('path')
   , arDrone = require('ar-drone')
   , drone  = arDrone.createClient()
-  , cxtwit = require('./cxndctwit');
+  , cxtwit = require('./cxndctwit')
+  , fs = require('fs');
 
 var app = express();
 
@@ -34,22 +35,37 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);   
+var io = require('socket.io').listen(server),
+    tweets = [];
+
+fs.readFile('tweets.json', function (err, data) {
+    if (!err) {
+        tweets = JSON.parse(data);
+    }
+});
+
 
 server.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
+
 });
 
 cxtwit.cxstream(function(tweet) {
-    console.log(tweet.text);
     io.sockets.emit('tweet', tweet);
+    tweets.push(tweet);
+    fs.writeFile("tweets.json", JSON.stringify(tweets), function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log("JSON saved to ");
+        }
+    });
 });
 
 io.sockets.on('connection', function (socket) {
-   /* socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });*/
+    for (var i = 0; i < tweets.length; i++) {
+        socket.emit('tweet', tweets[i]);
+    }
 });
 
 /*

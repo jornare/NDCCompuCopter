@@ -8,8 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-//  , arDrone = require('ar-drone')
-//  , drone  = arDrone.createClient()
+  , arDrone = require('ar-drone')
+  , drone  = arDrone.createClient()
   , cxtwit = require('./cxndctwit');
 
 var app = express();
@@ -41,7 +41,8 @@ server.listen(app.get('port'), function(){
 });
 
 cxtwit.cxstream(function(tweet) {
-	console.log(tweet.text);	
+    console.log(tweet.text);
+    io.sockets.emit('tweet', tweet);
 });
 
 io.sockets.on('connection', function (socket) {
@@ -51,8 +52,9 @@ io.sockets.on('connection', function (socket) {
     });*/
 });
 
+/*
 setInterval(function () {
     io.sockets.emit('tweet', {'msg':'asfdasf'});
 
 
-},1000);
+},1000);*/

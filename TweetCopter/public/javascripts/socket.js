@@ -19,8 +19,13 @@ var viewModel = function () {
     };
 
     this.addUser = function (user) {
-        self.users.push(user);
-
+        var users = self.users();
+        var found = false;
+        for (var key in users) {
+          if (users[key].screen_name === user.screen_name)
+            found = true;
+        }
+        if (!found) self.users.push(user);
     };
 };
 window.vm = new viewModel();

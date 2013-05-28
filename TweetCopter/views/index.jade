@@ -4,6 +4,8 @@ block content
   table(id='screens')
     tr
       td(id='screen1')
+        #users(data-bind="foreach:users")
+          div(data-bind="text:name")
       td(id='screen2')
         #tweets(data-bind="foreach:tweets")
           div(data-bind="text:text")

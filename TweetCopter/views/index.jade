@@ -5,7 +5,9 @@ block content
     tr
       td(id='screen1')
         #users(data-bind="foreach:users")
-          div(data-bind="text:name")
+          div
+            div(data-bind="text:name")
+            img(data-bind="attr:{src:profile_image_url}")
       td(id='screen2')
         #tweets(data-bind="foreach:tweets")
           div.twit
@@ -19,4 +21,5 @@ block content
     tr
       td(id='screen3')
       td(id='screen4')
+        #droneStream
   

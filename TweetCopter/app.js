@@ -36,8 +36,12 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 var server = http.createServer(app);
+
 var io = require('socket.io').listen(server),
     tweets = [];
+
+io.set('transports', ['xhr-polling']);
+io.set('destroy upgrade', false);
 
 fs.readFile('tweets.json', function (err, data) {
     if (!err) {
@@ -71,9 +75,3 @@ io.sockets.on('connection', function (socket) {
     }
 });
 
-/*
-setInterval(function () {
-    io.sockets.emit('tweet', {'msg':'asfdasf'});
-
-
-},1000);*/

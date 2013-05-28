@@ -21,7 +21,9 @@ table#screens td {
 }
 
 .twit {
-
+  float: left;
+  clear: both;
+  padding-left: 1em;
 }
 
 .twit-img {
@@ -52,4 +54,12 @@ table#screens td {
 .twit-text {
   float: left;
   clear: both;
+}
+
+.twit-date
+{
+  float: left;
+  clear: both;
+  opacity: 0.4;
+  font-size: 0.6em;
 }

@@ -13,9 +13,22 @@ var viewModel = function () {
     this.users = ko.observableArray();
 
     this.addTweet = function (tweet) {
-        self.tweets.push(tweet);
-        self.lastTweet(tweet);
-        self.addUser(tweet.user);
+      tweet.formattedDate = ko.computed(function () {
+        var current = new Date(this.created_at);
+        console.log(current);
+
+        var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][current.getMonth()];
+        var day = current.getDay().toString();
+        var hours = current.getHours().toString();
+        if (hours.length == 1) hours = "0" + hours;
+        var minutes = current.getMinutes().toString();
+        if (minutes.length == 1) minutes = "0" + minutes;
+
+        return month + " " + day + ", " + hours + ":" + minutes;
+      }, tweet);
+      self.tweets.push(tweet);
+      self.lastTweet(tweet);
+      self.addUser(tweet.user);
     };
 
     this.addUser = function (user) {

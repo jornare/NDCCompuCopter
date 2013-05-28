@@ -8,9 +8,9 @@
   "dependencies": {
     "express": "3.2.4",
     "jade": "*",
-	"socket.io": "*",
-	"ar-drone": "*",
+    "socket.io": "*",
+    "ar-drone": "*",
     "twit": "*",
-	"dronestream": "*"
+    "dronestream": "*"
   }
 }

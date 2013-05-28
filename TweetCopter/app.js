@@ -11,7 +11,8 @@ var express = require('express')
   , arDrone = require('ar-drone')
   , drone  = arDrone.createClient()
   , cxtwit = require('./cxndctwit')
-  , fs = require('fs');
+  , fs = require('fs')
+  , dronestream = require("dronestream");
 
 var app = express();
 
@@ -49,6 +50,8 @@ server.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 
 });
+dronestream.listen(server);
+
 
 cxtwit.cxstream(function(tweet) {
     io.sockets.emit('tweet', tweet);

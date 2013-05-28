@@ -35,5 +35,5 @@ window.vm = new viewModel();
 $(document).ready(function () {
 
     ko.applyBindings(window.vm);
-
+    new NodecopterStream(document.getElementById("droneStream"));
 });

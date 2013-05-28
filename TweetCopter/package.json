@@ -10,6 +10,7 @@
     "jade": "*",
 	"socket.io": "*",
 	"ar-drone": "*",
-    "twit": "*"
+    "twit": "*",
+	"dronestream": "*"
   }
 }

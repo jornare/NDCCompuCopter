@@ -5,7 +5,9 @@ block content
     tr
       td(id='screen1')
         #users(data-bind="foreach:users")
-          div(data-bind="text:name")
+          div
+            div(data-bind="text:name")
+            img(data-bind="attr:{src:profile_image_url}")
       td(id='screen2')
         #tweets(data-bind="foreach:tweets")
           div(data-bind="text:text")

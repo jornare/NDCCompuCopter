@@ -17,3 +17,37 @@ table#screens td {
   width: 50%;
   background: #f00;
 }
+
+.twit {
+
+}
+
+.twit-img {
+    float: left;
+    clear: left;
+}
+
+.twit-info {
+    float: left;
+    padding-left:1em;
+}
+.twit-name {
+   float: left;
+   font-weight:bold;
+}
+
+.twit-screen-name {
+  float: left;
+  opacity: 0.4;
+  padding-left: 0.5em;
+}
+
+  .twit-screen-name:before
+  {
+    content: '@';
+  }
+
+.twit-text {
+  float: left;
+  clear: both;
+}

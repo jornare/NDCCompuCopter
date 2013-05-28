@@ -1,25 +1,36 @@
 extends layout
 
-block content
-  table(id='screens')
-    tr
-      td(id='screen1')
-        #users(data-bind="foreach:users")
-          div
-            div(data-bind="text:name")
-            img(data-bind="attr:{src:profile_image_url}")
-      td(id='screen2')
-        #tweets(data-bind="foreach:tweets")
-          div.twit
-            div.twit-img
-              img(data-bind="attr: {src:user.profile_image_url}")
-            div.twit-info
-              div.twit-name(data-bind="text:user.name")
-              div.twit-screen-name(data-bind="text:user.screen_name")
-              div.twit-text(data-bind="text:text")
-              div.twit-date(data-bind="text:formattedDate")
-    tr
-      td(id='screen3')
-      td(id='screen4')
-        #droneStream
-  
+block content  
+
+  #topLeft.screen
+    #users(data-bind="foreach:users")
+      div(data-bind="attr:{id:screen_name}")
+        div(data-bind="text:name")
+        img(data-bind="attr:{src:profile_image_url}")
+        
+  #topRight.screen
+    #tweets(data-bind="foreach:tweets")
+      div.twit
+        div.twit-img
+          img(data-bind="attr: {src:user.profile_image_url}")
+        div.twit-info
+          div.twit-name(data-bind="text:user.name")
+          div.twit-screen-name(data-bind="text:user.screen_name")
+          div.twit-text(data-bind="text:text")
+          div.twit-date(data-bind="text:formattedDate")
+
+  #bottomLeft.screen
+    // TODO fiks denne teksten til det det skal være:
+    h1 Vinn en Drone :-)
+    h2 Send en tweet til @ComputasNDC med #nodecopter <kommando>
+    h4 Kommandoer du kan bruke er:
+      ul
+        li takeoff
+        li land
+        li flip
+        li blink
+        li sound
+        li rotate
+    
+  #bottomRight.screen
+    #droneStream

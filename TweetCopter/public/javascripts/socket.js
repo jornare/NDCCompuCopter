@@ -26,7 +26,7 @@ var viewModel = function () {
 
         return month + " " + day + ", " + hours + ":" + minutes;
       }, tweet);
-      self.tweets.push(tweet);
+      self.tweets.unshift(tweet); // prepends new tweets instead of appending; new ones at top of the page
       self.lastTweet(tweet);
       self.addUser(tweet.user);
     };

@@ -11,6 +11,7 @@ var express = require('express')
   , arDrone = require('ar-drone')
   , drone  = arDrone.createClient()
   , cxtwit = require('./cxndctwit')
+  , cxtest = require('./cxtest')
   , fs = require('fs')
   , dronestream = require("dronestream");
 
@@ -45,10 +46,11 @@ io.set('destroy upgrade', false);
 
 fs.readFile('tweets.json', function (err, data) {
     if (!err) {
-        tweets = JSON.parse(data);
+        tweets = cxtest.generateTestUserData(data);
+        console.log("tweets ? " + tweets.length);
+//        tweets = JSON.parse(data);
     }
 });
-
 
 server.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

@@ -5,6 +5,8 @@ block content
     tr
       td(id='screen1')
       td(id='screen2')
+        #tweets(data-bind="foreach:tweets")
+          div(data-bind="text:text")
     tr
       td(id='screen3')
       td(id='screen4')

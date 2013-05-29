@@ -66,6 +66,7 @@ a {
 .twit-info {
     float: left;
     padding-left:1em;
+    width: 80%;
 }
 .twit-name {
     float: left;

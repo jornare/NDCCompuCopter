@@ -28,6 +28,8 @@ a {
     right: 50%;
     margin-left: 1em;
     margin-right: 0.5em;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 #droneStream {
     display: block;
@@ -64,6 +66,7 @@ a {
 .twit-info {
     float: left;
     padding-left:1em;
+    width: 80%;
 }
 .twit-name {
     float: left;

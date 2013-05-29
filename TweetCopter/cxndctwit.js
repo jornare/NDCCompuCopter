@@ -10,10 +10,9 @@ var Twit = require('twit'),
 var twit = new Twit(securityConfig);
 
 exports.cxstream = function(callback){
-  var stream = twit.stream('statuses/filter', { track: 'computasndc' });
+  var stream = twit.stream('statuses/filter', { track: '#drone' });
 
   stream.on('tweet', function (tweet) {
-    // console.log(tweet);
     callback(tweet);
   });
 }

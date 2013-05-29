@@ -12,7 +12,8 @@ var express = require('express')
   , drone  = arDrone.createClient()
   , cxtwit = require('./cxndctwit')
   , fs = require('fs')
-  , dronestream = require("dronestream");
+  , dronestream = require("dronestream")
+  , droneTweet = require("./droneTweet").connectDrone(drone);
 
 var app = express();
 
@@ -49,24 +50,23 @@ fs.readFile('tweets.json', function (err, data) {
     }
 });
 
-
 server.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 
 });
+
+// receive stream from drone
 dronestream.listen(server);
 
-
 cxtwit.cxstream(function(tweet) {
-    io.sockets.emit('tweet', tweet);
     tweets.push(tweet);
     fs.writeFile("tweets.json", JSON.stringify(tweets), function (err) {
         if (err) {
             console.log(err);
-        } else {
-            //console.log("JSON saved to ");
         }
     });
+    droneTweet.receive(tweet.text);
+    io.sockets.emit('tweet', tweet);
 });
 
 io.sockets.on('connection', function (socket) {

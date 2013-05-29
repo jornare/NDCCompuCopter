@@ -28,6 +28,8 @@ a {
     right: 50%;
     margin-left: 1em;
     margin-right: 0.5em;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 #droneStream {
     display: block;

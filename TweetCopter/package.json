@@ -11,6 +11,7 @@
     "socket.io": "*",
     "ar-drone": "*",
     "twit": "*",
-    "dronestream": "*"
+    "dronestream": "*",
+    "async": "*"
   }
 }

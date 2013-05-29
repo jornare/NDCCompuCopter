@@ -1,56 +1,61 @@
 * {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 html, body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  height: 100%;
-  background-color: #777;
-  color: #000;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100%;
+    color: #000;
+    background-color: #ccc;
 }
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
-p, h1, h2, h3, h4 {
-  margin-top: 2em;
+.box-column {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #eee;
+    display: block;
+    position:absolute;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
-
-/*** Main layout for the four screens */
-
-.screen {
-  overflow: hidden;
-  position: absolute;
-  overflow: auto;
-  width: 49%;
-  height: 49%;
-  background-color: #fff;
-  margin: 2px;
-  padding-left: 5px;
+#screen1 {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 50%;
+    margin-left: 1em;
+    margin-right: 0.5em;
 }
-#topLeft {
-  top: 5px;
-  left: 5px;
+#droneStream {
+    display: block;
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
 }
-#topRight {
-  top: 5px;
-  right: 5px;
+#screen2 {
+    top: 380px;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    margin-left: 0.5em;
+    margin-right: 1em;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
-#bottomLeft {
-  bottom: 5px;
-  left: 5px;
-  text-align: center;
-}
-#bottomRight {
-  bottom: 5px;
-  right: 5px;
-}
-
-/*** Twitterbox */
-
 .twit {
     float: left;
     clear: both;
     padding-left: 1em;
+    padding-top: 1em;
+    width: 100%;
 }
 .twit-img {
     float: left;
@@ -81,4 +86,20 @@ p, h1, h2, h3, h4 {
     clear: both;
     opacity: 0.4;
     font-size: 0.6em;
+}
+#users {
+    float: left;
+}
+.user-image {
+    text-align: center;
+    float: left;
+    clear: none;
+    padding-left: 1em;
+}
+.user-image img {
+    padding: 0.5em;
+    padding-bottom: 0;
+}
+.user-image div:before {
+    content: '@';
 }

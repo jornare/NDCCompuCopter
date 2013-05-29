@@ -11,6 +11,11 @@ var viewModel = function () {
     this.lastTweet = ko.observable();
     this.tweets = ko.observableArray();
     this.users = ko.observableArray();
+    this.reverseTweets = ko.computed(function() {
+        var copy = this.tweets.slice(0);
+        copy.reverse();
+        return copy;
+    }, this);
 
     this.addTweet = function (tweet) {
       tweet.formattedDate = ko.computed(function () {

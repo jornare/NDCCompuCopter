@@ -1,13 +1,17 @@
 extends layout
 
 block content
+  #droneStream
+  h1 Computas Drone Challenge
+    h2 Want to win something awesome? Join the competition by tweeting with #computasDrone as your hashtag.
+
   #screen1.box-column
+    h1 Competitors
     #users(data-bind="foreach:users")
       div.user-image
         img(data-bind="attr:{src:profile_image_url,title:name,alt:screen_name}")
         div(data-bind="text:screen_name")
 
-  #droneStream
   #screen2.box-column
     #tweets(data-bind="foreach:tweets")
       div.twit

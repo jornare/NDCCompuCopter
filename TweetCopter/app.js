@@ -1,8 +1,27 @@
+/**
+ * Module dependencies.
+ */
+var droneIP = '192.168.1.1';
+var express = require('express')
+  , routes = require('./routes')
+  , user = require('./routes/user')
+  , http = require('http')
+  , path = require('path')
+  , arDrone = require('ar-drone')
+  , drone = arDrone.createClient({ip:droneIP})
+  , cxtwit = require('./cxndctwit')
+  , cxtest = require('./cxtest')
+  , fs = require('fs')
+  , dronestream = require("dronestream")
+  , droneTweet = require("./droneTweet").connectDrone(drone);
+
+drone.config('general:navdata_demo', 'FALSE');
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.setRawMode(true);
 process.stdin.on('data', function (char) {
+    console.log('pressed ' + char);
     if (char == '\3') {
         console.log('\nExiting on Ctrl-C...');
         process.exit();
@@ -14,10 +33,11 @@ process.stdin.on('data', function (char) {
     } else {
         switch (char) {
             case 't':
-                drone.takeoff();
+                console.log('up');
+                drone.up(0.1);
                 break;
             case 'w':
-                drone.animate('wave',5000);
+                drone.animate('wave', 5000);
                 break;
             case 'r':
                 drone.disableEmergency();
@@ -26,49 +46,11 @@ process.stdin.on('data', function (char) {
                 drone.land();
                 break;
             default:
-                console.log('pressed '+char);
+                console.log('pressed ' + char);
         }
     }
 });
 
-//var stdin = process.openStdin();
-/*process.stdin.setRawMode();
-
-
-process.stdin.on('keypress', function (chunk, key) {
-    console.log('Get Chunk: ' + chunk + '\n');
-    if (key && key.ctrl && key.name == 'c') process.exit();
-    if (key) {
-        console.log(key.name);
-        switch (key.name) {
-            case 't':
-                drone.takeoff();
-                break;
-            case 'l':
-                drone.land();
-                break;
-            default:
-                console.log(key.name);
-        }
-    }
-});
-*/
-/**
- * Module dependencies.
- */
-
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path')
-  , arDrone = require('ar-drone')
-  , drone  = arDrone.createClient()
-  , cxtwit = require('./cxndctwit')
-  , cxtest = require('./cxtest')
-  , fs = require('fs')
-  , dronestream = require("dronestream")
-  , droneTweet = require("./droneTweet").connectDrone(drone);
 
 var app = express();
 
@@ -113,7 +95,13 @@ server.listen(app.get('port'), function(){
 });
 
 // receive stream from drone
-dronestream.listen(server);
+dronestream.listen(server, { ip: droneIP });
+
+drone.on('navdata', function (data) {
+    io.sockets.emit('navdata', data);
+    //console.log(data);
+});
+
 
 cxtwit.cxstream(function(tweet) {
     tweets.push(tweet);

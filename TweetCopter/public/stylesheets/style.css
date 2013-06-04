@@ -2,53 +2,94 @@
     padding: 0;
     margin: 0;
 }
+
 html, body {
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-family: 'Segoe UI', sans-serif;
     height: 100%;
     color: #000;
-    background-color: #ccc;
 }
+
 a {
     color: #00B7FF;
 }
+
 .box-column {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background-color: #eee;
     display: block;
     position:absolute;
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+h1 {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    color: #00B7FF;
+    font-family: 'Segoe UI Light', sans-serif;
+    font-size: 48px;
+    background: -webkit-linear-gradient(#FFF, #FFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    text-shadow: 1px 4px 10px black;
+    z-index: 1;
+}
+
+h2 {
+    position: absolute;
+    top: 120px;
+    left: 50px;
+    max-width: 730px;
+    background: -webkit-linear-gradient(#FFF, #EEE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    text-shadow: 1px 4px 10px black;
+    z-index: 1;
+}
+
+#screen1 h1 {
+    top: -75px;
+    left: 0px;
+    background: -webkit-linear-gradient(#FFF, #FFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    text-shadow: 1px 4px 10px black;
+    z-index: 1;
+    max-height: 600px;
+    overflow: auto;
+}
+
 #screen1 {
-    top: 0;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     right: 50%;
-    margin-left: 1em;
-    margin-right: 0.5em;
-    overflow-y: auto;
-    overflow-x: hidden;
+    margin-left: 50px;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 10px;
 }
+
 #droneStream {
-    display: block;
-    position:absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    right: 0;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1000;
 }
+
+#droneStream canvas {
+    width: 100%;
+    height: auto;
+}
+
 #screen2 {
-    top: 380px;
-    bottom: 0;
-    left: 50%;
-    right: 0;
-    margin-left: 0.5em;
-    margin-right: 1em;
+    top: 50px;
+    right: 50px;
+    bottom: 50px;
+    width: 400px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -58,6 +99,11 @@ a {
     padding-left: 1em;
     padding-top: 1em;
     width: 100%;
+    background: #FFF;
+    box-shadow: 1px;
+    border-bottom: 1px solid #CCC;
+    min-height: 80px;
+    vertical-align: top;
 }
 .twit-img {
     float: left;

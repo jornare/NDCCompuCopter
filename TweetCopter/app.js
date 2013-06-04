@@ -1,4 +1,58 @@
 
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+process.stdin.setRawMode(true);
+process.stdin.on('data', function (char) {
+    if (char == '\3') {
+        console.log('\nExiting on Ctrl-C...');
+        process.exit();
+    } else if (char == 'q') {
+        console.log('\nExiting on q...');
+        process.exit();
+    } else if (char == '\4') {
+        console.log('\nCtrl+D');
+    } else {
+        switch (char) {
+            case 't':
+                drone.takeoff();
+                break;
+            case 'w':
+                drone.animate('wave',5000);
+                break;
+            case 'r':
+                drone.disableEmergency();
+                break;
+            case 'l':
+                drone.land();
+                break;
+            default:
+                console.log('pressed '+char);
+        }
+    }
+});
+
+//var stdin = process.openStdin();
+/*process.stdin.setRawMode();
+
+
+process.stdin.on('keypress', function (chunk, key) {
+    console.log('Get Chunk: ' + chunk + '\n');
+    if (key && key.ctrl && key.name == 'c') process.exit();
+    if (key) {
+        console.log(key.name);
+        switch (key.name) {
+            case 't':
+                drone.takeoff();
+                break;
+            case 'l':
+                drone.land();
+                break;
+            default:
+                console.log(key.name);
+        }
+    }
+});
+*/
 /**
  * Module dependencies.
  */
@@ -77,4 +131,5 @@ io.sockets.on('connection', function (socket) {
         socket.emit('tweet', tweets[i]);
     }
 });
+
 

@@ -32,7 +32,31 @@ process.stdin.on('data', function (char) {
         console.log('\nCtrl+D');
     } else {
         switch (char) {
+            case '8':
+                console.log('front');
+                drone.front(0.1);
+                break;
+            case '6':
+                console.log('right');
+                drone.right(0.1);
+                break;
+            case '2':
+                console.log('back');
+                drone.back(0.1);
+                break;
+            case '4':
+                console.log('left');
+                drone.left(0.1);
+                break;
+            case '5':
+                console.log('stop');
+                drone.stop();
+                break;
             case 't':
+                console.log('takeoff');
+                drone.takeoff();
+                break;
+            case 'u':
                 console.log('up');
                 drone.up(0.1);
                 break;
@@ -96,12 +120,12 @@ server.listen(app.get('port'), function(){
 
 // receive stream from drone
 dronestream.listen(server, { ip: droneIP });
-
+/*
 drone.on('navdata', function (data) {
     io.sockets.emit('navdata', data);
     //console.log(data);
 });
-
+*/
 
 cxtwit.cxstream(function(tweet) {
     tweets.push(tweet);

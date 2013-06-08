@@ -7,6 +7,9 @@ exports.connectDrone = function (droneInstance) {
         self.queue.push(cmd);
     };
     this.execute = function () {
+        if (cmd.length == 0) {
+            return null;
+        }
         var cmd = self.queue.pop();
         drone.takeoff(function () {
             if (cmd.animateLeds) {
@@ -25,6 +28,7 @@ exports.connectDrone = function (droneInstance) {
             
             return false;
         });
+        return cmd;
     };
 
 

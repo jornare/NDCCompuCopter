@@ -104,12 +104,18 @@ cxtwit.cxstream(function(tweet) {
             console.log(err);
         }
     });
+    io.sockets.emit('tweet', tweet);
     var cmd = tweetParser.parseTweetCmd(tweet);
     if (cmd) {
         cmd.tweetId = tweet.id;
-        droneCommandQueue.push(cmd);
+        if (drone.isReady) {
+            drone.isReady = false;
+            io.sockets.emit('droneIsReady', false);
+            droneCommandQueue.push(cmd);
+            droneCommandQueue.execute();
+            console.log("Press ! when ready to accept tweet commands");
+        }
     }
-    io.sockets.emit('tweet', tweet);
 });
 
 io.sockets.on('connection', function (socket) {
@@ -118,5 +124,5 @@ io.sockets.on('connection', function (socket) {
     }
 });
 
-
+console.log("Press ! when ready to accept tweet commands");
 //drone.config('video:video_channel', 3);

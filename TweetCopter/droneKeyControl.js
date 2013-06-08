@@ -75,9 +75,18 @@ exports.connect = function (drone, droneCommandQueue, sockets) {
                     sockets.emit('draw');
                     break;
                 case '!':
-                    var cmd = droneCommandQueue.execute();
+                    /*var cmd = droneCommandQueue.execute();
                     if (cmd) {
                         sockets.emit('dronecmd', cmd);
+                    }*/
+                    if (drone.isReady) {
+                        sockets.emit('droneIsReady', false);
+                        drone.isReady = false;
+                        console.log('Not accepting tweet commands');
+                    } else {
+                        sockets.emit('droneIsReady', true);
+                        drone.isReady = true;
+                        console.log('Ready to accept tweet commands');
                     }
                     break;
                 default:

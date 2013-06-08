@@ -20,7 +20,7 @@ var shortCmds = ['greenRed', 'flip', 'dance', 'wave'];
 
 var shortCmdObjects = {
 	greenRed: { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}},
-	flip: { animate: { animation: 'flipLeft', duration: 2000}},
+	flip: { animate: { animation: 'flipLeft', duration: 1000}},
 	dance: { animate: { animation: 'vzDance', duration: 2000}},
 	wave:  { animate: { animation: 'wave', duration: 2000}}
 };

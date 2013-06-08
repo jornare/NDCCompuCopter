@@ -18,6 +18,7 @@ var express = require('express')
 
 
 drone.config('general:navdata_demo', 'FALSE');
+drone.isReady = false;
 
 //var control = arDrone.createUdpControl();
 
@@ -108,7 +109,6 @@ cxtwit.cxstream(function(tweet) {
         cmd.tweetId = tweet.id;
         droneCommandQueue.push(cmd);
     }
-    droneTweet.receive(tweet.text);
     io.sockets.emit('tweet', tweet);
 });
 

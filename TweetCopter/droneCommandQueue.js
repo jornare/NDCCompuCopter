@@ -7,7 +7,7 @@ exports.connectDrone = function (droneInstance) {
         self.queue.push(cmd);
     };
     this.execute = function () {
-        if (cmd.length == 0) {
+        if (self.queue.length == 0) {
             return null;
         }
         var cmd = self.queue.pop();
@@ -19,7 +19,7 @@ exports.connectDrone = function (droneInstance) {
                     drone.land();
                 });
             } else {
-                drone.animate(cmd.animation, cmd.duration);
+                drone.animate(cmd.animate.animation, cmd.animate.duration);
                 drone.after(5000, function () {
                     drone.stop();
                     drone.land();

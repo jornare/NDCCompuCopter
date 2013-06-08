@@ -75,7 +75,6 @@ exports.connect = function (drone, droneCommandQueue, sockets) {
                     sockets.emit('draw');
                     break;
                 case '!':
-                    sockets.emit('draw');
                     var cmd = droneCommandQueue.execute();
                     if (cmd) {
                         sockets.emit('dronecmd', cmd);

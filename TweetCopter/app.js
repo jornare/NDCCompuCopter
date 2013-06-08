@@ -13,7 +13,8 @@ var express = require('express')
   , cxtest = require('./cxtest')
   , fs = require('fs')
   , dronestream = require("dronestream")
-  , droneTweet = require("./droneTweet").connectDrone(drone);
+  , droneCommandQueue = require("./droneCommandQueue").connectDrone(drone)
+  , tweetParser = require("./tweetCmdParser.js");
 
 
 drone.config('general:navdata_demo', 'FALSE');
@@ -102,6 +103,10 @@ cxtwit.cxstream(function(tweet) {
             console.log(err);
         }
     });
+    var cmd = tweetParser.parseTweetCmd(tweet);
+    if (cmd) {
+
+    }
     droneTweet.receive(tweet.text);
     io.sockets.emit('tweet', tweet);
 });

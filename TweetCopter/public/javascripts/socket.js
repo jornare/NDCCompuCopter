@@ -11,6 +11,12 @@ socket.on('draw', function () {
     //socket.emit('my other event', { my: 'data' });
 });
 
+socket.on('droneIsReady', function (isReady) {
+    console.log(isReady);
+    window.vm.droneReady(isReady);
+    //socket.emit('my other event', { my: 'data' });
+});
+
 /*example navdata
 { header: 1432778632,
     droneState:
@@ -103,6 +109,7 @@ var viewModel = function () {
     this.users = ko.observableArray();
     this.draw = ko.observable(false);
     this.winner = ko.observable();
+    this.droneReady = ko.observable(false);
 
     this.addTweet = function (tweet) {
       tweet.formattedDate = ko.computed(function () {
@@ -128,7 +135,7 @@ var viewModel = function () {
     });
 
     this.competitionText = ko.computed(function () {
-        var text = "Want to win something awesome? Join the competition by tweeting with #computasDrone as your hashtag.";
+        var text = "Win a drone! Tweet #computasNDC 'your drone-command'. (ask us or ... flip)";
         if (self.draw()) {
             text = "And the winner is ...";
         }
@@ -136,6 +143,10 @@ var viewModel = function () {
     });
 
     this.startCompetition = function () {
+        
+        if (self.draw()) {
+            copterAnimations.resetCompetition();
+        }
         // as we start the competition draw, we set the drawing flag to true
         self.draw(true);
         // get a random number
@@ -165,12 +176,10 @@ var viewModel = function () {
     });
 
 };
+
 window.vm = new viewModel();
 
-
-
 $(document).ready(function () {
-
     ko.applyBindings(window.vm);
     new NodecopterStream(document.getElementById("droneStream"));
 });

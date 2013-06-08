@@ -2,12 +2,17 @@ extends layout
 
 block content
   #droneStream
-  h1 Computas Drone Challenge
+  header#computasChallenge
+    img(src="images/computas.png", id="computasLogo")
+    h1 The Drone Challenge
     h2(data-bind="text: competitionText")
+    h1(data-bind="if: droneReady()")
+      | I AM READY
+
 
   <!-- ko ifnot: draw -->
   #challengers.box-column(data-bind="ifnot: draw")
-    h1 
+    h1
       span(data-bind="text: challengers") 
       |  Competitors
     #users(data-bind="foreach:users")

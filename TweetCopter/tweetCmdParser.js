@@ -25,13 +25,13 @@ var shortCmdObjects = {
 	wave:  { animate: { animation: 'wave', duration: 2000}}
 };
 
-var numberValidator = function(number, min, max, default) {
+var numberValidator = function(number, min, max, defaultVal) {
 	if (typeof number === 'number') {
- 		if (number < min) || number > max) {
- 			number = default;
+ 		if (number < min || number > max) {
+ 		    number = defaultVal;
  		}
  	} else {
- 		number = default;
+	    number = defaultVal;
  	}
 
  	return number;

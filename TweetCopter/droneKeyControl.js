@@ -1,4 +1,4 @@
-exports.connectDrone = function (drone) {
+exports.connectDrone = function (drone, sockets) {
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
     process.stdin.setRawMode(true);
@@ -71,6 +71,8 @@ exports.connectDrone = function (drone) {
                     drone.stop();
                     drone.land();
                     break;
+                case '?':
+                    sockets.emit('draw');
                 default:
                     console.log('pressed ' + char);
             }

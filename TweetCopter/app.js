@@ -15,7 +15,7 @@ var express = require('express')
   , dronestream = require("dronestream")
   , droneTweet = require("./droneTweet").connectDrone(drone);
 
-require("./droneKeyControl").connectDrone(drone);
+
 drone.config('general:navdata_demo', 'FALSE');
 
 //var control = arDrone.createUdpControl();
@@ -52,6 +52,8 @@ var io = require('socket.io').listen(server),
 io.set('transports', ['xhr-polling']);
 io.set('destroy upgrade', false);
 io.set('log level', 1);
+
+require("./droneKeyControl").connect(drone, io.sockets);
 
 fs.readFile('tweets.json', function (err, data) {
     if (!err) {

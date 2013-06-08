@@ -163,4 +163,9 @@ exports.testParseTweetCmd = function () {
     cmd = this.parseTweetCmd(tweet);
     verifyAnimateLedCmd(cmd, 'blinkGreenRed', 'Test json animateLed cmd');
 
+    // Test json animate cmd
+    tweet = { text: 'Testing3:  #computasndc med hashtag. { "animate": { "animation": "thetaDance", "duration": 2} } ' };
+    cmd = this.parseTweetCmd(tweet);
+    verifyAnimateCmd(cmd, 'thetaDance', 'Test json animate cmd');
+
 };

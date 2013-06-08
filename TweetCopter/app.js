@@ -57,6 +57,7 @@ process.stdin.on('data', function (char) {
             case '5':
                 console.log('stop');
                 drone.stop();
+                break;
             case '7':
                 console.log('Cclockwise');
                 drone.counterClockwise(0.1);
@@ -70,7 +71,7 @@ process.stdin.on('data', function (char) {
                 break;
             case 't':
                 console.log('takeoff');
-                drone.takeoff();
+                drone.takeoff(onHover);
                 break;
             case 'u':
                 console.log('up');
@@ -152,6 +153,23 @@ drone.on('navdata', function (data) {
     //console.log(data);
 });
 
+function onHover() {
+    drone.land();
+    return false;//must return falsy value
+}
+
+/*
+drone.on('altitudeChange', function (altitude) {
+    console.log(altitude);
+
+    if (altitude < 1.5 && drone._ref.fly) {
+        drone.up(1.0);
+    }
+    if (altitude > 1.55 ) {
+        drone.down(0.01);
+    }
+});*/
+
 
 cxtwit.cxstream(function(tweet) {
     tweets.push(tweet);
@@ -171,3 +189,4 @@ io.sockets.on('connection', function (socket) {
 });
 
 
+//drone.config('video:video_channel', 3);

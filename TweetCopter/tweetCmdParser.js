@@ -16,6 +16,15 @@ var ledAnimations = ['blinkGreenRed', 'blinkGreen', 'blinkRed', 'blinkOrange', '
 'rearLeftGreenOthersRed', 'leftGreenRightRed', 'leftRedRightGreen',
 'blinkStandard'];
 
+var shortCmds = ['greenRed', 'flip', 'dance', 'wave'];
+
+var shortCmdObjects = {
+	greenRed: { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}},
+	flip: { animate: { animation: 'flipLeft', duration: 2000}},
+	dance: { animate: { animation: 'vzDance', duration: 2000}},
+	wave:  { animate: { animation: 'wave', duration: 2000}}
+};
+
 var numberValidator = function(number, min, max, default) {
 	if (typeof number === 'number') {
  		if (number < min) || number > max) {
@@ -51,10 +60,7 @@ var cmdValidator = function(cmd) {
  	return cmd;
  };
 
-exports.parseTweetCmd = function(tweet){
-	// return { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}};
-
-	var text = tweet.text;
+var parseJsonCmd = function(text) {
 	var cmd = null;
 
 	var startPos = text.indexOf('{');
@@ -70,6 +76,31 @@ exports.parseTweetCmd = function(tweet){
 	}
 	catch (ex) {
 		console.log(ex);
+	}
+
+	return cmd;
+};
+
+var parseShortCmd = function(text) {
+	for (var i in shortCmds) {
+		var shortCmd = shortCmds[i];
+		var pos = text.indexOf(shortCmd);
+		if (pos >= 0) {
+			return shortCmdObjects[shortCmd];
+		}
+	}
+
+	return null;
+};
+
+exports.parseTweetCmd = function(tweet){
+	// return { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}};
+
+	var text = tweet.text;
+	var cmd = parseJsonCmd(text);
+
+	if (cmd === null) {
+		cmd = parseShortCmd(text);
 	}
 
 	return cmd;

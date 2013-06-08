@@ -11,7 +11,18 @@ var ledAnimations = ['blinkGreenRed', 'blinkGreen', 'blinkRed', 'blinkOrange', '
 'rearLeftGreenOthersRed', 'leftGreenRightRed', 'leftRedRightGreen',
 'blinkStandard'];
 
-// var parse
+var numberValidator = function(number, min, max, default) {
+	if (typeof number === 'number') {
+ 		if (number < min) || number > max) {
+ 			number = default;
+ 		}
+ 	} else {
+ 		number = default;
+ 	}
+
+ 	return number;
+}
+
 var cmdValidator = function(cmd) {
  	if (cmd.animateLeds) {
  		var animation = cmd.animateLeds.animation;
@@ -19,12 +30,10 @@ var cmdValidator = function(cmd) {
  			return null;
  		}
 
- 		if (!cmd.animateLeds.hz) {
- 			cmd.animateLeds.hz = 5;
- 		}
-
- 		// , hz, duration)
+ 		cmd.animateLeds.hz = numberValidator(cmd.animateLeds.hz, 1, 20, 4);
+ 		cmd.animateLeds.duration = numberValidator(cmd.animateLeds.duration, 1, 5, 2);
  	}
+
  	return cmd;
  };
 
@@ -50,5 +59,4 @@ exports.parseTweetCmd = function(tweet){
 	}
 
 	return cmd;
-  });
 };

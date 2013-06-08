@@ -1,4 +1,4 @@
-exports.connectDrone = function (drone, droneCommandQueue, sockets) {
+exports.connect = function (drone, droneCommandQueue, sockets) {
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
     process.stdin.setRawMode(true);
@@ -92,5 +92,5 @@ exports.connectDrone = function (drone, droneCommandQueue, sockets) {
         //drone.land();
         return false;//must return falsy value
     }
-
+    return this;
 }

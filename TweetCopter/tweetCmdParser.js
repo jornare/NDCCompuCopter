@@ -4,6 +4,11 @@
  * Module dependencies.
  */
 
+var animations = ['phiM30Deg', 'phi30Deg', 'thetaM30Deg', 'theta30Deg', 'theta20degYaw200deg',
+'theta20degYawM200deg', 'turnaround', 'turnaroundGodown', 'yawShake',
+'yawDance', 'phiDance', 'thetaDance', 'vzDance', 'wave', 'phiThetaMixed',
+'doublePhiThetaMixed', 'flipAhead', 'flipBehind', 'flipLeft', 'flipRight'];
+
 var ledAnimations = ['blinkGreenRed', 'blinkGreen', 'blinkRed', 'blinkOrange', 'snakeGreenRed',
 'fire', 'standard', 'red', 'green', 'redSnake', 'blank', 'rightMissile',
 'leftMissile', 'doubleMissile', 'frontLeftGreenOthersRed',
@@ -24,14 +29,23 @@ var numberValidator = function(number, min, max, default) {
 }
 
 var cmdValidator = function(cmd) {
+	var animation;
  	if (cmd.animateLeds) {
- 		var animation = cmd.animateLeds.animation;
+ 		animation = cmd.animateLeds.animation;
  		if (ledAnimations.indexOf(animation) < 0) {
  			return null;
  		}
 
  		cmd.animateLeds.hz = numberValidator(cmd.animateLeds.hz, 1, 20, 4);
  		cmd.animateLeds.duration = numberValidator(cmd.animateLeds.duration, 1, 5, 2);
+ 	} else
+ 	if (cmd.animate) {
+ 		animation = cmd.animate.animation;
+ 		if (animations.indexOf(animation) < 0) {
+ 			return null;
+ 		}
+
+ 		cmd.animate.duration = numberValidator(cmd.animate.duration, 1000, 5000, 2000);
  	}
 
  	return cmd;

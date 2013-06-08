@@ -6,9 +6,13 @@ block content
     img(src="images/computas.png", id="computasLogo")
     h1 The Drone Challenge
     h2(data-bind="text: competitionText")
-    h1(data-bind="if: droneReady()")
-      | I AM READY
 
+  <!-- ko ifnot: draw -->
+  #droneStatus.box-column
+    h1
+      | DRONE STATUS
+    div(data-bind="css: { ready: droneReady() }")
+  <!-- /ko -->
 
   <!-- ko ifnot: draw -->
   #challengers.box-column(data-bind="ifnot: draw")
@@ -21,7 +25,7 @@ block content
         div(data-bind="text:screen_name")
   #entries.box-column(data-bind="ifnot: draw")
     h1 Latest entries
-    #tweets(data-bind="foreach:latestTweets")
+    #tweets(data-bind="foreach: {data: latestTweets, afterAdd: copterAnimations.fadeInElement }")
       div.twit
         div.twit-img
           img(data-bind="attr:{src:user.profile_image_url}")

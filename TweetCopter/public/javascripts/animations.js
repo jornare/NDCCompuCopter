@@ -13,4 +13,8 @@ var copterAnimations = copterAnimations || {};
         $('#users').show();
         $('#winner').hide();
     };
+
+    copterAnimations.fadeInElement = function (elem) {
+        if (elem.nodeType === 1) $(elem).fadeIn('500');
+    }
 })();

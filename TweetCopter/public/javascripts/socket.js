@@ -135,7 +135,7 @@ var viewModel = function () {
     });
 
     this.competitionText = ko.computed(function () {
-        var text = "Win a drone! Tweet #computasNDC 'your drone-command'. (ask us or ... flip)";
+        var text = "Win a drone! Tweet #computasNDC 'your drone-command' (ask us ... or 'flip').";
         if (self.draw()) {
             text = "And the winner is ...";
         }

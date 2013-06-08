@@ -6,14 +6,15 @@ block content
     h2 Want to win something awesome? Join the competition by tweeting with #computasDrone as your hashtag.
 
   #screen1.box-column
-    h1 Competitors
+    h1 Challengers
     #users(data-bind="foreach:users")
       div.user-image
         img(data-bind="attr:{src:profile_image_url,title:name,alt:screen_name}")
         div(data-bind="text:screen_name")
 
   #screen2.box-column
-    #tweets(data-bind="foreach:tweets")
+    h1 Latest entries
+    #tweets(data-bind="foreach:latestTweets")
       div.twit
         div.twit-img
           img(data-bind="attr:{src:user.profile_image_url}")

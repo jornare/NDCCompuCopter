@@ -52,7 +52,7 @@ var cmdValidator = function(cmd) {
  };
 
 exports.parseTweetCmd = function(tweet){
-	return { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}};
+	// return { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}};
 
 	var text = tweet.text;
 	var cmd = null;

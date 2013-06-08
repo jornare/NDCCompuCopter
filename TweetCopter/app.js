@@ -105,6 +105,7 @@ cxtwit.cxstream(function(tweet) {
     });
     var cmd = tweetParser.parseTweetCmd(tweet);
     if (cmd) {
+        cmd.tweetId = tweet.id;
         droneCommandQueue.push(cmd);
     }
     droneTweet.receive(tweet.text);

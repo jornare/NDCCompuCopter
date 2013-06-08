@@ -17,8 +17,21 @@ a {
 .box-column {
     display: block;
     position:absolute;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 0 10px;
+}
+
+#droneStream {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1000;
+}
+
+#droneStream canvas {
+    width: 100%;
+    height: auto;
 }
 
 h1 {
@@ -40,6 +53,7 @@ h2 {
     position: absolute;
     top: 120px;
     left: 50px;
+    min-width: 500px;
     max-width: 730px;
     background: -webkit-linear-gradient(#FFF, #EEE);
     -webkit-background-clip: text;
@@ -49,79 +63,65 @@ h2 {
     z-index: 1;
 }
 
-#screen1 h1, #screen2 h1 {
+#challengers h1, #entries h1, #drawing h1 {
     top: -75px;
     left: 0px;
-    background: -webkit-linear-gradient(#FFF, #FFF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     text-shadow: 1px 4px 10px black;
     z-index: 1;
     max-height: 600px;
     overflow: auto;
+    background: -webkit-linear-gradient(#FFF, #FFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-#screen1 {
-    bottom: 50px;
-    left: 0;
-    right: 50%;
-    margin-left: 50px;
-    background: rgba(255, 255, 255, 0.75);
-    padding: 10px;
-}
-
-#screen2 {
+#entries {
     top: 125px;
     right: 50px;
-    bottom: 50px;
-    width: 400px;
-}
-
-#droneStream {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1000;
-}
-
-#droneStream canvas {
-    width: 100%;
-    height: auto;
+    background: #FFF;
+    min-width: 420px;
+    max-width: 420px;
 }
 
 .twit {
     float: left;
     clear: both;
-    padding-left: 1em;
-    padding-top: 1em;
-    width: 100%;
-    background: #FFF;
-    box-shadow: 1px;
+    padding: 10px;
     border-bottom: 1px solid #CCC;
     min-height: 80px;
-    vertical-align: top;
+    min-width: 400px;
 }
+
 .twit-img {
     float: left;
     clear: left;
+    vertical-align: middle;
 }
+
+.twit-img img {
+    width: 48px;
+    height: auto;
+}
+
 .twit-info {
     float: left;
-    padding-left:1em;
+    padding-left: 10px;
     width: 80%;
+    vertical-align: top;
 }
+
 .twit-name {
     float: left;
     font-weight:bold;
 }
+
 .twit-screen-name {
     float: left;
     opacity: 0.4;
     padding-left: 0.5em;
 }
+
 .twit-screen-name:before {
     content: '@';
 }
@@ -130,24 +130,82 @@ h2 {
     clear: both;
 }
 .twit-date {
-    float: left;
+    float: right;
     clear: both;
     opacity: 0.4;
-    font-size: 0.6em;
+    font-size: 12px;
 }
+
+#challengers {
+    bottom: 50px;
+    left: 50px;
+    min-width: 400px;
+    max-width: 420px;
+    max-height: 240px;
+    background: #FFF;
+    padding: 10px;
+}
+
+#challengers #users {
+    overflow: hidden;
+    max-height: 240px;
+    max-width: 400px;
+}
+
 #users {
     float: left;
 }
+
+#drawing {
+    top: 50%;
+    background: #FFF;
+    left: 50px;
+    height: 200px;
+    right: 50px;
+    padding: 10px;
+}
+
+#drawing #users {
+    height: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+#drawing .user-image {
+    text-align: center;
+    float: left;
+    clear: none;
+    min-width: 150px;
+    max-width: 150px;
+    min-height: 200px;
+    max-height: 200px;
+}
+
+#winner {
+    display: none;
+}
+
 .user-image {
     text-align: center;
     float: left;
     clear: none;
-    padding-left: 1em;
+    min-width: 133px;
+    max-width: 133px;
+    min-height: 80px;
+    max-height: 80px;
 }
+
+.user-image div {
+    word-wrap: none;
+    font-size: 12px;
+}
+
+
 .user-image img {
-    padding: 0.5em;
-    padding-bottom: 0;
+    padding: 10px 0px 0px 0px;
 }
+
 .user-image div:before {
     content: '@';
 }

@@ -1,7 +1,13 @@
 var socket = io.connect('http://localhost:3000');
+
 socket.on('tweet', function (data) {
     console.log(data);
     window.vm.addTweet(data);
+    //socket.emit('my other event', { my: 'data' });
+});
+
+socket.on('draw', function () {
+    window.vm.startCompetition();
     //socket.emit('my other event', { my: 'data' });
 });
 
@@ -95,11 +101,12 @@ var viewModel = function () {
     this.lastTweet = ko.observable();
     this.tweets = ko.observableArray();
     this.users = ko.observableArray();
+    this.draw = ko.observable(false);
+    this.winner = ko.observable();
 
     this.addTweet = function (tweet) {
       tweet.formattedDate = ko.computed(function () {
         var current = new Date(this.created_at);
-        console.log(current);
 
         var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][current.getMonth()];
         var day = current.getDay().toString();
@@ -120,15 +127,43 @@ var viewModel = function () {
         return self.tweets.slice(0, 5);
     });
 
+    this.competitionText = ko.computed(function () {
+        var text = "Want to win something awesome? Join the competition by tweeting with #computasDrone as your hashtag.";
+        if (self.draw()) {
+            text = "And the winner is ...";
+        }
+        return text;
+    });
+
+    this.startCompetition = function () {
+        // as we start the competition draw, we set the drawing flag to true
+        self.draw(true);
+        // get a random number
+        var winner = Math.floor(Math.random() * self.users().length);
+        self.winner(self.users()[winner]);
+        copterAnimations.endCompetition();
+    };
+
     this.addUser = function (user) {
+        // if competition is over and draw is started ... do not add any competitors
+        if (self.draw()) {
+            return;
+        }
         var users = self.users();
         var found = false;
         for (var key in users) {
           if (users[key].screen_name === user.screen_name)
             found = true;
         }
-        if (!found) self.users.push(user);
+        if (!found) {
+            self.users.unshift(user); // prepends new user instead of appending; new ones at top of the page
+        }
     };
+
+    this.challengers = ko.computed(function () {
+        return self.users().length;
+    });
+
 };
 window.vm = new viewModel();
 

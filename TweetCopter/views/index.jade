@@ -3,24 +3,41 @@ extends layout
 block content
   #droneStream
   h1 Computas Drone Challenge
-    h2 Want to win something awesome? Join the competition by tweeting with #computasDrone as your hashtag.
+    h2(data-bind="text: competitionText")
 
-  #screen1.box-column
-    h1 Challengers
+  <!-- ko ifnot: draw -->
+  #challengers.box-column(data-bind="ifnot: draw")
+    h1 
+      span(data-bind="text: challengers") 
+      |  Competitors
     #users(data-bind="foreach:users")
       div.user-image
         img(data-bind="attr:{src:profile_image_url,title:name,alt:screen_name}")
         div(data-bind="text:screen_name")
-
-  #screen2.box-column
+  #entries.box-column(data-bind="ifnot: draw")
     h1 Latest entries
     #tweets(data-bind="foreach:latestTweets")
       div.twit
         div.twit-img
           img(data-bind="attr:{src:user.profile_image_url}")
         div.twit-info
+          div.twit-date(data-bind="text:formattedDate")
           div.twit-name(data-bind="text:user.name")
           div.twit-screen-name(data-bind="text:user.screen_name")
           div.twit-text(data-bind="text:text")
-          div.twit-date(data-bind="text:formattedDate")
-  
+  <!-- /ko -->
+  <!-- ko if: draw -->
+  #drawing.box-column
+    h1
+      span(data-bind="text: challengers") 
+      |  COMPETITORS
+    #users(data-bind="foreach: users")
+      div.user-image
+        img(data-bind="attr:{src:profile_image_url,title:name,alt:screen_name}")
+        div(data-bind="text:screen_name")
+    #winner(data-bind="if: winner()")
+      div.user-image
+        img(data-bind="attr:{src: winner().profile_image_url, title: winner().name, alt: winner().screen_name}")
+        div(data-bind="text: winner().screen_name")
+  <!-- /ko -->
+  script(type='text/javascript', src='/javascripts/animations.js')

@@ -115,6 +115,11 @@ var viewModel = function () {
       self.addUser(tweet.user);
     };
 
+    // get only 5 latest tweets
+    this.latestTweets = ko.computed(function () {
+        return self.tweets.slice(0, 5);
+    });
+
     this.addUser = function (user) {
         var users = self.users();
         var found = false;

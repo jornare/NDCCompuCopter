@@ -78,10 +78,7 @@ drone.on('navdata', function (data) {
     //console.log(data);
 });
 
-function onHover() {
-    drone.land();
-    return false;//must return falsy value
-}
+
 
 /*
 drone.on('altitudeChange', function (altitude) {

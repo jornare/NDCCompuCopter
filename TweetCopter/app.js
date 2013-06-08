@@ -54,7 +54,7 @@ io.set('transports', ['xhr-polling']);
 io.set('destroy upgrade', false);
 io.set('log level', 1);
 
-require("./droneKeyControl").connect(drone, droneCommandQueue, io.sockets);
+var keyControl = require("./droneKeyControl").connect(drone, droneCommandQueue, io.sockets);
 
 fs.readFile('tweets.json', function (err, data) {
     if (!err) {

@@ -17,6 +17,8 @@ var express = require('express')
 
 drone.config('general:navdata_demo', 'FALSE');
 
+//var control = arDrone.createUdpControl();
+
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.setRawMode(true);
@@ -34,23 +36,37 @@ process.stdin.on('data', function (char) {
         switch (char) {
             case '8':
                 console.log('front');
-                drone.front(0.1);
+                drone.front(0.07);
+                break;
+            case '9':
+                console.log('clockwise');
+                drone.clockwise(0.1);
                 break;
             case '6':
                 console.log('right');
-                drone.right(0.1);
+                drone.right(0.07);
                 break;
             case '2':
                 console.log('back');
-                drone.back(0.1);
+                drone.back(0.07);
                 break;
             case '4':
                 console.log('left');
-                drone.left(0.1);
+                drone.left(0.07);
                 break;
             case '5':
                 console.log('stop');
                 drone.stop();
+            case '7':
+                console.log('Cclockwise');
+                drone.counterClockwise(0.1);
+                break;
+
+/*
+                control.ref({ fly: true, emergency: true });
+                control.pcmd({});
+                control.flush();*/
+
                 break;
             case 't':
                 console.log('takeoff');
@@ -61,12 +77,17 @@ process.stdin.on('data', function (char) {
                 drone.up(0.1);
                 break;
             case 'w':
-                drone.animate('wave', 5000);
+                drone.animate('wave', 3000);
                 break;
             case 'r':
                 drone.disableEmergency();
                 break;
+            case 'c':
+                drone.stop();
+                drone.calibrate(0);
+                break;
             case 'l':
+                drone.stop();
                 drone.land();
                 break;
             default:
@@ -104,6 +125,7 @@ var io = require('socket.io').listen(server),
 
 io.set('transports', ['xhr-polling']);
 io.set('destroy upgrade', false);
+io.set('log level', 1);
 
 fs.readFile('tweets.json', function (err, data) {
     if (!err) {
@@ -120,12 +142,16 @@ server.listen(app.get('port'), function(){
 
 // receive stream from drone
 dronestream.listen(server, { ip: droneIP });
-/*
+
+var navDataCount=0;
 drone.on('navdata', function (data) {
-    io.sockets.emit('navdata', data);
+    navDataCount++;
+    if (navDataCount % 10 == 0) {
+        io.sockets.emit('navdata', data);
+    }
     //console.log(data);
 });
-*/
+
 
 cxtwit.cxstream(function(tweet) {
     tweets.push(tweet);

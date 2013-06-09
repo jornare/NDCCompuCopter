@@ -9,8 +9,7 @@ block content
 
   <!-- ko ifnot: draw -->
   #droneStatus.box-column
-    h1
-      | DRONE STATUS
+    h1(data-bind="text: droneState")
     div(data-bind="css: { ready: droneReady() }")
   <!-- /ko -->
 

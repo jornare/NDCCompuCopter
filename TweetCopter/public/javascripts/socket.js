@@ -133,6 +133,14 @@ var viewModel = function () {
     this.latestTweets = ko.computed(function () {
         return self.tweets.slice(0, 5);
     });
+ 
+    this.droneState = ko.computed(function () {
+        var text = 'Not ready';
+        if (self.droneReady()) {
+            text = 'Ready';
+        }
+        return text;
+    });
 
     this.competitionText = ko.computed(function () {
         var text = "Win a drone! Tweet #computasNDC 'your drone-command' (ask us ... or 'flip').";

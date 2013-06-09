@@ -147,7 +147,8 @@ header#computasChallenge h2 {
 }
 
 #challengers #users {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
     max-height: 240px;
     max-width: 400px;
 }
@@ -216,6 +217,7 @@ header#computasChallenge h2 {
     max-width: 420px;
     background: rgba(255,255,255,0.75);
     min-height: 100px;
+    overflow: visible;
 }
 
 #droneStatus div {

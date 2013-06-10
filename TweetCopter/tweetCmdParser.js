@@ -16,13 +16,14 @@ var ledAnimations = ['blinkGreenRed', 'blinkGreen', 'blinkRed', 'blinkOrange', '
 'rearLeftGreenOthersRed', 'leftGreenRightRed', 'leftRedRightGreen',
 'blinkStandard'];
 
-var shortCmds = ['greenRed', 'flip', 'dance', 'wave'];
+var shortCmds = ['greenRed', 'flip', 'dance', 'wave', 'turnaround'];
 
 var shortCmdObjects = {
 	greenRed: { animateLeds: { animation: 'blinkGreenRed', hz: 5, duration: 2}},
 	flip: { animate: { animation: 'flipLeft', duration: 1000}},
 	dance: { animate: { animation: 'vzDance', duration: 2000}},
-	wave:  { animate: { animation: 'wave', duration: 2000}}
+	wave: { animate: { animation: 'wave', duration: 2000 } },
+    turnaround:  { animate: { animation: 'turnaround', duration: 2000}}
 };
 
 var numberValidator = function(number, min, max, defaultVal) {

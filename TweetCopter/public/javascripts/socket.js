@@ -17,6 +17,12 @@ socket.on('droneIsReady', function (isReady) {
     //socket.emit('my other event', { my: 'data' });
 });
 
+socket.on('dronecmd', function (tweet) {
+    console.log();
+    window.vm.setActiveTweet(tweet);
+    //socket.emit('my other event', { my: 'data' });
+});
+
 /*example navdata
 { header: 1432778632,
     droneState:
@@ -111,6 +117,8 @@ var viewModel = function () {
     this.winner = ko.observable();
     this.droneReady = ko.observable(false);
 
+    this.competitionHeader = ko.observable('Win a drone!')
+
     this.addTweet = function (tweet) {
       tweet.formattedDate = ko.computed(function () {
         var current = new Date(this.created_at);
@@ -124,6 +132,7 @@ var viewModel = function () {
 
         return month + " " + day + ", " + hours + ":" + minutes;
       }, tweet);
+      tweet.active = ko.observable(false);
       self.tweets.unshift(tweet); // prepends new tweets instead of appending; new ones at top of the page
       self.lastTweet(tweet);
       self.addUser(tweet.user);
@@ -134,16 +143,31 @@ var viewModel = function () {
         return self.tweets.slice(0, 5);
     });
  
+    this.setActiveTweet = function (tweet) {
+        var i = 0;
+        console.log(self.tweets().length);
+
+        for (i; i < self.tweets().length; i++) {
+            if (tweet.id == self.tweets()[i].id) {
+                self.tweets()[i].active(true);
+                setTimeout(function () {
+                    self.tweets()[i].active(false);
+                }, 5000);
+                return;
+            }
+        }
+    }
+
     this.droneState = ko.computed(function () {
         var text = 'Not ready';
         if (self.droneReady()) {
-            text = 'Ready';
+            text = 'Drone ready';
         }
         return text;
     });
 
     this.competitionText = ko.computed(function () {
-        var text = "Win a drone! Tweet #computasNDC 'your drone-command' (ask us ... or 'flip').";
+        var text = 'Join by tweeting: #computasNDC "your drone-command".';
         if (self.draw()) {
             text = "And the winner is ...";
         }
@@ -151,7 +175,6 @@ var viewModel = function () {
     });
 
     this.startCompetition = function () {
-        
         if (self.draw()) {
             copterAnimations.resetCompetition();
         }
@@ -179,10 +202,9 @@ var viewModel = function () {
         }
     };
 
-    this.challengers = ko.computed(function () {
+    this.nrOfChallengers = ko.computed(function () {
         return self.users().length;
     });
-
 };
 
 window.vm = new viewModel();

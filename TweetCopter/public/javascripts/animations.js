@@ -9,7 +9,6 @@ var copterAnimations = copterAnimations || {};
             if ($("div#users div.user-image").length > 9)
                 // change last participant with first ... carousel
                 $('div#users div.user-image:last').insertBefore('div#users div.user-image:first');
-                $('div#users div.user-image:first').hide().fadeIn(250);
         }, 2500);
 
     };

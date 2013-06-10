@@ -27,7 +27,7 @@ a {
 
 .box-column {
     display: block;
-    position:absolute;
+    position: absolute;
     margin: 0 10px;
 }
 
@@ -66,12 +66,11 @@ header#computasChallenge h2 {
     font-size: 48px;
     top: -75px;
     left: 0px;
+    background: -webkit-linear-gradient(#FFF, #FFF);
     text-transform: uppercase;
     text-shadow: 1px 4px 10px black;
     z-index: 1;
     max-height: 600px;
-    overflow: auto;
-    background: -webkit-linear-gradient(#FFF, #FFF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -79,12 +78,12 @@ header#computasChallenge h2 {
 #entries {
     top: 105px;
     right: 50px;
-    background: rgba(255,255,255,0.75);
     min-width: 420px;
     max-width: 420px;
 }
 
 .twit {
+    background: rgba(255,255,255,0.75);
     float: left;
     clear: both;
     padding: 10px;
@@ -136,6 +135,35 @@ header#computasChallenge h2 {
     font-size: 12px;
 }
 
+.twit.current {
+    -webkit-animation-name: bounce;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 5;
+    -webkit-animation-direction: alternate;
+}
+
+@keyframes bounce {
+    from {
+        background: rgba(255,255,255, 1);
+        margin-left: -50px;
+    }
+    to {
+        background: rgba(255,255,255,0.75);
+        margin-left: 0;
+    }
+}
+
+@-webkit-keyframes bounce {
+    from {
+        background: rgba(255,255,255, 1);
+        margin-left: -50px;
+    }
+    to {
+        background: rgba(255,255,255,0.75);
+        margin-left: 0;
+    }
+}
+
 #challengers {
     bottom: 50px;
     left: 50px;
@@ -151,6 +179,24 @@ header#computasChallenge h2 {
     overflow-y: hidden;
     max-height: 240px;
     max-width: 400px;
+}
+
+#droneStatus {
+    bottom: 50px;
+    right: 50px;
+    min-width: 420px;
+    max-width: 420px;
+    min-height: 100px;
+}
+
+#droneStatus div {
+    background: rgba(255, 0, 0, 0.8);
+    height: 100px;
+    width: 420px;
+}
+
+#droneStatus div.ready {
+    background: rgba(0, 255, 0, 0.8);
 }
 
 #users {
@@ -208,24 +254,4 @@ header#computasChallenge h2 {
 
 .user-image div:before {
     content: '@';
-}
-
-#droneStatus {
-    bottom: 50px;
-    right: 50px;
-    min-width: 420px;
-    max-width: 420px;
-    background: rgba(255,255,255,0.75);
-    min-height: 100px;
-    overflow: visible;
-}
-
-#droneStatus div {
-    background: rgba(255, 0, 0, 0.8);
-    height: 100px;
-    width: 420px;
-}
-#droneStatus div.ready {
-    background: rgba(0, 255, 0, 0.8);
-
 }

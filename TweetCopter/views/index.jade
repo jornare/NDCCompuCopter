@@ -4,8 +4,8 @@ block content
   #droneStream
   header#computasChallenge
     img(src="images/computas.png", id="computasLogo")
-    h1(data-bind="text: competitionHeader")
-    h2(data-bind="text: competitionText")
+    h1(data-bind="text: competitionHeader")&nbsp
+    h2(data-bind="text: competitionText")&nbsp
 
   <!-- ko ifnot: draw -->
   #droneStatus.box-column
@@ -15,9 +15,9 @@ block content
   <!-- /ko -->
 
   <!-- ko ifnot: draw -->
-  #challengers.box-column
+  #competitors.box-column
     h1
-      span(data-bind="text: nrOfChallengers") 
+      span(data-bind="text: nrOfCompetitors") 
       |  Competitors
     #users(data-bind="foreach: users")
       div.user-image
@@ -37,10 +37,7 @@ block content
   <!-- /ko -->
   <!-- ko if: draw -->
   #drawing.box-column
-    h1
-      span(data-bind="text: nrOfChallengers") 
-      |  COMPETITORS
-    #users(data-bind="foreach: users")
+    #competitors(data-bind="foreach: users")
       div.user-image
         img(data-bind="attr:{src:profile_image_url,title:name,alt:screen_name}")
         div(data-bind="text:screen_name")

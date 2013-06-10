@@ -61,7 +61,7 @@ header#computasChallenge h2 {
     height: auto;
 }
 
-#challengers h1, #entries h1, #drawing h1, #droneStatus h1 {
+#competitors h1, #entries h1, #drawing h1, #droneStatus h1 {
     position: absolute;
     font-size: 48px;
     top: -75px;
@@ -164,7 +164,7 @@ header#computasChallenge h2 {
     }
 }
 
-#challengers {
+#competitors {
     bottom: 50px;
     left: 50px;
     min-width: 400px;
@@ -174,7 +174,7 @@ header#computasChallenge h2 {
     padding: 10px;
 }
 
-#challengers #users {
+#competitors #users {
     overflow-x: hidden;
     overflow-y: hidden;
     max-height: 240px;
@@ -203,36 +203,6 @@ header#computasChallenge h2 {
     float: left;
 }
 
-#drawing {
-    background: #FFF;
-    top: 50%;
-    left: 50px;
-    right: 50px;
-    height: 200px;
-    padding: 10px;
-}
-
-#drawing #users {
-    height: 100px;
-    max-height: 100px;
-    overflow: hidden;
-    vertical-align: middle;
-}
-
-#drawing .user-image {
-    text-align: center;
-    float: left;
-    clear: none;
-    min-width: 150px;
-    max-width: 150px;
-    min-height: 200px;
-    max-height: 200px;
-}
-
-#winner {
-    display: none;
-}
-
 .user-image {
     text-align: center;
     float: left;
@@ -254,4 +224,203 @@ header#computasChallenge h2 {
 
 .user-image div:before {
     content: '@';
+}
+
+/* DRAWING  GUI */
+
+#drawing {
+    background: #FFF;
+    top: 50%;
+    left: 50px;
+    right: 50px;
+    height: 200px;
+    padding: 10px;
+    display: none;
+    overflow: hidden;
+}
+
+#drawing.enabled {
+    top: 50%;
+    left: 50px;
+    margin-top: -100px;
+    -webkit-animation-name: slideDown;
+    -webkit-animation-duration: 3s;
+}
+
+@keyframes slideDown {
+    from {
+        top: -400px;
+    }
+    to {
+        top: 50%;
+    }
+}
+
+@-webkit-keyframes slideDown {
+    from {
+        top: -400px;
+    }
+    to {
+        top: 50%;
+    }
+}
+
+#drawing #competitors {
+    background: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+#drawing #competitors .user-image {
+    text-align: center;
+    float: left;
+    clear: none;
+    min-width: 178px;
+    max-width: 10%;
+    min-height: 200px;
+    vertical-align: middle;
+}
+
+#winner div.user-image {
+    display: none;
+}
+
+#drawing.winner {
+    -webkit-animation-name: bigShrink;
+    -webkit-animation-duration: 4s;
+    left: 851px;
+    right: 851px;
+}
+
+@keyframes bigShrink {
+    from {
+        left: 50px;
+        right: 50px;
+    }
+    to {
+        left: 851px;
+        right: 851px;
+    }
+}
+
+@-webkit-keyframes bigShrink {
+    from {
+        left: 50px;
+        right: 50px;
+    }
+    to {
+        left: 851px;
+        right: 851px;
+    }
+}
+
+#drawing #competitors .user-image.active img {
+    -webkit-animation-name: shrink;
+    -webkit-animation-duration: 3s;
+}
+
+@keyframes shrink {
+    from {
+        height: 116px;
+        width: auto;
+    }
+    to {
+        height: 48px;
+    }
+}
+
+@-webkit-keyframes shrink {
+    from {
+        height: 116px;
+        width: auto;
+    }
+    to {
+        height: 48px;
+    }
+}
+
+#drawing #competitors .user-image.active, #drawing #winner .user-image.active {
+    -webkit-animation-name: competition;
+    -webkit-animation-duration: 3s;
+}
+
+@keyframes competition {
+    from {
+        background: #004264;
+    }
+    to {
+        background: white;
+    }
+}
+
+@-webkit-keyframes competition {
+    from {
+        background: #004264;
+    }
+    to {
+        background: white;
+    }
+}
+
+#drawing #competitors div.user-image.active.winner div {
+    font-size: x-large;
+    word-wrap: break-word;
+}
+
+#drawing #competitors div.user-image.active.winner div {
+    font-size: x-large;
+    word-wrap: break-word;
+    -webkit-animation-name: expandFont;
+    -webkit-animation-duration: 3s;
+}
+
+@keyframes expandFont {
+    from {
+        font-size: 14px;
+    }
+    to {
+        font-size: x-large;
+    }
+}
+
+@-webkit-keyframes expandFont {
+    from {
+        font-size: 12px;
+    }
+    to {
+        font-size: x-large;
+    }
+}
+
+#drawing #competitors div.user-image.active.winner img {
+    margin-top: 30px;
+    height: 100px;
+    width: auto;
+    -webkit-animation-name: winShrink;
+    -webkit-animation-duration: 3s;
+}
+
+@keyframes winShrink {
+    from {
+        margin-top: 0;
+        height: 116px;
+        width: auto;
+    }
+    to {
+        margin-top: 30px;
+        height: 100px;
+    }
+}
+
+@-webkit-keyframes winShrink {
+    from {
+        margin-top: 0px;
+        height: 116px;
+        width: auto;
+    }
+    to {
+        margin-top: 30px;
+        height: 100px;
+    }
 }

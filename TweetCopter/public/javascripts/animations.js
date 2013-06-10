@@ -10,23 +10,35 @@ var copterAnimations = copterAnimations || {};
                 // change last participant with first ... carousel
                 $('div#users div.user-image:last').insertBefore('div#users div.user-image:first');
         }, 2500);
-
     };
 
-    copterAnimations.endCompetition = function () {
-        setTimeout(function () {    
-            $('#users').hide();
-            $('#winner').show();
-        }, 5000);
+    copterAnimations.animateCompetition = function () {
+        $('#drawing').addClass('enabled').show();
+        // start animating a roll ... carousel with css3 handling the animation
+        var timeCompetition = setInterval(function () {    
+            $('div#competitors div.user-image:last').addClass('active').insertBefore('div#competitors div.user-image:first');
+        }, 250);   
+       // after 10 seconds, we start shrinking our viewport. css3 handles the animation 
+        setTimeout(function () {
+            $('#drawing').addClass('winner');
+        }, 7500);
+        // after 15 seconds, we hide all participants and show our winner.
+        setTimeout(function () {
+            clearInterval(timeCompetition);
+            $('#winner div.user-image').addClass('active winner').insertBefore('div#competitors div.user-image:first');
+        }, 12500);
     };
+
     copterAnimations.resetCompetition = function () {
-        $('#users').show();
-        $('#winner').hide();
+        $('#drawing').removeClass('enabled');
+        $('div#competitors div.user-image.active').show();
+        $('div#competitors div.user-image:first').appendTo($('#winner'));
+        $('div#competitors div.user-image').each(function () {
+            $(this).removeClass('active');
+        });
+        $('#drawing').removeClass('winner expand');
+        $('#winner div.user-image.active.winner').removeClass('active winner');
     };
-
-    copterAnimations.fadeInElement = function (elem) {
-        if (elem.nodeType === 1) $(elem).fadeIn('500');
-    }
 
     setTimeout(function () {
         copterAnimations.scrollCompetitors();

@@ -180,10 +180,11 @@ var viewModel = function () {
         }
         // as we start the competition draw, we set the drawing flag to true
         self.draw(true);
+        // start animating the draw
+        copterAnimations.animateCompetition();
         // get a random number
         var winner = Math.floor(Math.random() * self.users().length);
         self.winner(self.users()[winner]);
-        copterAnimations.endCompetition();
     };
 
     this.addUser = function (user) {
@@ -202,7 +203,7 @@ var viewModel = function () {
         }
     };
 
-    this.nrOfChallengers = ko.computed(function () {
+    this.nrOfCompetitors = ko.computed(function () {
         return self.users().length;
     });
 };

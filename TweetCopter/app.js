@@ -75,6 +75,7 @@ dronestream.listen(server, { ip: droneIP });
 
 var navDataCount=0;
 drone.on('navdata', function (data) {
+    return;//not yet in use, so disable
     navDataCount++;
     if (navDataCount % 10 == 0) {
         io.sockets.emit('navdata', data);
@@ -113,6 +114,7 @@ cxtwit.cxstream(function(tweet) {
             io.sockets.emit('droneIsReady', false);
             droneCommandQueue.push(cmd);
             droneCommandQueue.execute();
+            sockets.emit('dronecmd', cmd);
             console.log("Press ! when ready to accept tweet commands");
         }
     }

@@ -3,7 +3,7 @@ NDCCompuCopter
 
 Publikum kan selv sende kommandoer til dronen via tweets tagget med #computasndc.
 
-En kommando kan enten være en enkel eller json. 
+En kommando kan enten være enkel eller json. 
 
 Enkle kommandoer kan være:
 * dance
@@ -26,6 +26,7 @@ Operasjon av drone
 For å ha rimelig kontroll, kan dronen kun ta i mot en kommando om gangen. Mellom hver kommando lander dronen.
 
 *Klargjøring mellom hver tweet*
+
 Når dronen er klar til å ta i mot neste kommando, trykker operatøren '!' i konsolet for serveren. Når kommandoen er utført, trykkes '!' en gang til for å hindre flere kommandoer i å bli utført.
 
 Mellom hver kommando må dronen plasseres på midterste markør.

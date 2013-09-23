@@ -13,7 +13,7 @@ exports.connectDrone = function (droneInstance) {
         var cmd = self.queue.pop();
         drone.takeoff(function () {
             if (cmd.animateLeds) {
-                drone.animateLed(cmd.animateLeds.animation, cmd.animateLeds.duration, cmd.animateLeds.hz);
+                drone.animateLeds(cmd.animateLeds.animation, cmd.animateLeds.duration, cmd.animateLeds.hz);
                 drone.after(3000, function () {
                     drone.stop();
                     drone.land();
@@ -30,9 +30,5 @@ exports.connectDrone = function (droneInstance) {
         });
         return cmd;
     };
-
-
-
-
     return this;
 }

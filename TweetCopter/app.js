@@ -1,6 +1,7 @@
 /**
  * Module dependencies.
  */
+var generateTestData = false;
 var droneIP = '192.168.1.1';
 var express = require('express')
   , routes = require('./routes')
@@ -59,9 +60,12 @@ var keyControl = require("./droneKeyControl").connect(drone, droneCommandQueue, 
 
 fs.readFile('tweets.json', function (err, data) {
     if (!err) {
-        tweets = cxtest.generateTestUserData(data);
-        console.log("tweets ? " + tweets.length);
-//        tweets = JSON.parse(data);
+        if (generateTestData) {
+            tweets = cxtest.generateTestUserData(data);
+            console.log("tweets ? " + tweets.length);
+        } else {
+            tweets = JSON.parse(data);
+        }
     }
 });
 
@@ -114,7 +118,7 @@ cxtwit.cxstream(function(tweet) {
             io.sockets.emit('droneIsReady', false);
             droneCommandQueue.push(cmd);
             droneCommandQueue.execute();
-            sockets.emit('dronecmd', cmd);
+            io.sockets.emit('dronecmd', cmd);
             console.log("Press ! when ready to accept tweet commands");
         }
     }
